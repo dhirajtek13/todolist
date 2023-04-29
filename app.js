@@ -4,27 +4,44 @@ const express = require("express");
 const bodyParser = require("body-parser");
 
 const app = express();
+app.set("view engine", "ejs");
 
-app.get("/", function(req, res) {
-    // res.send("hello");
-    const today = new Date();
-    var currentDay = today.getDay();
-    if(currentDay === 6 ||currentDay == 0) {
-        // res.send("<b>yey! its the weekend</b>");
+app.get("/", function (req, res) {
+  // res.send("hello");
+  const today = new Date();
+  var currentDay = today.getDay();
+  var day = "";
 
-        // res.write("<b>yey! its the weekend</b>");
-        // res.send();
+  switch (currentDay) {
+    case 6:
+      day = "Saturday";
+      break;
+    case 0:
+      day = "Sunday";
+      break;
+    case 1:
+      day = "Monday";
+      break;
+    case 2:
+      day = "Tuesday";
+      break;
+    case 3:
+      day = "Wednesday";
+      break;
+    case 4:
+      day = "Thursday";
+      break;
+    case 5:
+      day = "Friday";
+      break;
 
-        res.sendFile(__dirname+'/index.html');
-
-    }  else {
-        res.send("Boo! I have to work!");
-    }
+    default:
+        console.log("Erro: current day is equal to "+currentDay);
+      break;
+  }
+  res.render("list", { kindOfDay: day });
 });
 
-
-
-
-app.listen(3000, function() {
-    console.log("server started on port 3000.");
+app.listen(3000, function () {
+  console.log("server started on port 3000.");
 });
