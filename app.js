@@ -9,23 +9,24 @@ var items = ["Buy Food", "cook Food", "Eat Food"];
 app.set("view engine", "ejs"); //for ejs template engine
 
 app.use(bodyParser.urlencoded({extended:true}));//for form body parser
+app.use(express.static("public"));
 
 app.get("/", function (req, res) {
   // res.send("hello");
-  const today = new Date();
+  let today = new Date();
 
-  var options = {
+  let options = {
     weekday: "long",
     day: "numeric",
     month: "long"
   };
 
-  var day = today.toLocaleDateString("en-US", options);
+  let day = today.toLocaleDateString("en-US", options);
   res.render("list", { kindOfDay: day, newItems: items });
 });
 
 app.post("/", function(req, res) {
-    var item = req.body.newItem;
+    let item = req.body.newItem;
     items.push(item);
     res.redirect("/");
 })
