@@ -1,10 +1,10 @@
 // jshint esversion:6
 
 // module.exports = getDate; //single export
-module.exports.getDate = getDate;
-module.exports.getDay = getDay;
+// module.exports.getDate = getDate;
+// module.exports.getDay = getDay;
 
-function getDate() {
+module.exports.getDate = function () {
 let today = new Date();
 
   let options = {
@@ -16,7 +16,7 @@ let today = new Date();
   return today.toLocaleDateString("en-US", options);
 }
 
-function getDay() {
+module.exports.getDay = function () {
   let today = new Date();
   
     let options = {
