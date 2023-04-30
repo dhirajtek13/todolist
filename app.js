@@ -7,8 +7,8 @@ const date = require(__dirname+"/date.js"); //custom module created
 
 const app = express();
 
-var items = ["Buy Food", "cook Food", "Eat Food"];
-var workItems = [];
+const items = ["Buy Food", "cook Food", "Eat Food"];
+const workItems = [];
 app.set("view engine", "ejs"); //for ejs template engine
 
 app.use(bodyParser.urlencoded({extended:true}));//for form body parser
@@ -17,13 +17,13 @@ app.use(express.static("public"));
 app.get("/", function (req, res) {
   // res.send("hello");
     // let day = date(); //single export time
-    let day = date.getDate();
+    const day = date.getDate();
 
   res.render("list", { listTitle: day, newItems: items });
 });
 
 app.post("/", function(req, res) {
-    let item = req.body.newItem;
+    const item = req.body.newItem;
     if(req.body.list === "work") {
         workItems.push(item);
         res.redirect("/work");
